@@ -30,7 +30,8 @@ export default class LoginPage extends React.Component
       buttonActive:false
      },
      errorMessage:"",
-     successMessage:""
+     successMessage:"",
+     loginSuccess:false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -105,14 +106,14 @@ export default class LoginPage extends React.Component
 
     submit()
     {
-      this.setState({successMessage:"",errorMessage:""});
+      this.setState({successMessage:"",errorMessage:"",loginSuccess:false});
         const {formValue}=this.state;
         if(formValue){
 
         if((this.state.formValue.username)===uname && (this.state.formValue.password)===pwd)
         {
           this.setState({successMessage:"Login successfully"});
-          
+          this.setState({loginSuccess:true})
         }
         else{
           this.setState({errorMessage:"Login Failed"});
@@ -120,6 +121,7 @@ export default class LoginPage extends React.Component
        }
        
       }
+      
 
     
 
@@ -159,8 +161,7 @@ export default class LoginPage extends React.Component
                         <span name="passwordError" className="text-danger">{this.state.formError.passwordError}</span>
                         <br/><br/>
                         <div className="form-group">
-                          <input type="submit" onClick={this.handleSubmit} value="Login" className="btn float-center login_btn" disabled={!this.state.formValid.buttonActive}/>
-                         
+                        <input type="submit" value="Login"  onClick={this.handleSubmit} className="btn float-center login_btn" disabled={!this.state.formValid.buttonActive}/>
                         </div>
                         <span name="loginSuccess" className="text-success">{this.state.successMessage}</span>
                         <span name="loginError" className="text-danger">{this.state.errorMessage}</span>
@@ -175,5 +176,6 @@ export default class LoginPage extends React.Component
        </div>
     </div>
     );
+    
     }
 }
